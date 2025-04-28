@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Monte seu Vídeo!</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+  h2 { color: #333; text-align: center; }
+  .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .card:hover { transform: translateY(-5px); background: #e0f7fa; }
+  .card.selected { background: #a7ffeb; }
+  .total {
+    margin-top: 30px;
+    font-size: 1.8em;
+    text-align: center;
+    color: #2a9d8f;
+  }
+</style>
+</head>
+<body>
+
+<h2>Monte seu Vídeo!</h2>
+
+<div class="container" id="services">
+  <div class="card" data-value="40">Retirada de erros<br><small>R$ 40</small></div>
+  <div class="card" data-value="30">Legendas<br><small>R$ 30</small></div>
+  <div class="card" data-value="20">Trilha Sonora<br><small>R$ 20</small></div>
+  <div class="card" data-value="40">Motion Textos Animados<br><small>R$ 40</small></div>
+  <div class="card" data-value="30">Motion Elementos Gráficos<br><small>R$ 30</small></div>
+  <div class="card" data-value="20">Sound Effects (SFX)<br><small>R$ 20</small></div>
+  <div class="card" data-value="20">Banco de Imagem<br><small>R$ 20</small></div>
+</div>
+
+<div class="total">Total: R$ <span id="total">0</span></div>
+
+<script>
+const cards = document.querySelectorAll('.card');
+const totalSpan = document.getElementById('total');
+let total = 0;
+
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('selected');
+    const value = parseInt(card.getAttribute('data-value'));
+    if (card.classList.contains('selected')) {
+      total += value;
+    } else {
+      total -= value;
+    }
+    totalSpan.textContent = total;
+  });
+});
+</script>
+
+</body>
+</html>
